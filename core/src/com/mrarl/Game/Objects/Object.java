@@ -8,4 +8,9 @@ public class Object {
     MyWorld world;
     public Body body;
     public int index;
+
+    public Object(MyWorld world,int index) {
+        this.world = world;
+        this.index = index;
+    }
 }

@@ -5,9 +5,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mrarl.Constants;
 import com.mrarl.Game.HudController;
+import com.mrarl.Game.MyWorld;
+import com.mrarl.Game.WorldController;
 import com.mrarl.Loader;
 
 public class GameScreen implements Screen {
@@ -16,6 +20,7 @@ public class GameScreen implements Screen {
     OrthographicCamera hud; // Все элементы в расчёте из разрешения
     SpriteBatch batch;
     HudController hudController;
+    WorldController worldController;
     @Override
     public void show() {
         batch = new SpriteBatch();
@@ -31,11 +36,16 @@ public class GameScreen implements Screen {
         hudController.createJoystick(35,25,100,false);
         hudController.createButton(10,50,40,40,false,true,"M");
         Gdx.input.setInputProcessor(hudController);
+        // World
+        worldController = new WorldController(camera,new MyWorld(new World(new Vector2(0,-10),true),"S",camera));
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        // World
+        worldController.render(batch);
+        // HUD
         hudController.update(delta);
         hudController.render(batch);
     }
@@ -67,6 +77,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         hudController.dispose();
+        worldController.dispose();
         Loader.dispose();
     }
 }

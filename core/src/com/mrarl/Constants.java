@@ -7,4 +7,7 @@ public class Constants {
     public static final int heightW = 15;
     // Hud
     public static final String button = "button";
+    // World
+    public static final String fone = "fone";
+    public static final String wall = "wall";
 }

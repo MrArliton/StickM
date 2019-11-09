@@ -20,7 +20,7 @@ public class MyWorld {
     public MyWorld(World world,String nameFone,OrthographicCamera camera) {
         this.camera = camera;
         this.world = world;
-        backwall = new Sprite(Loader.getRegion("fone"+nameFone));
+        backwall = new Sprite(Loader.getRegion(Constants.fone+nameFone));
         if(Constants.debug){
             rdebug = new Box2DDebugRenderer();
         }
